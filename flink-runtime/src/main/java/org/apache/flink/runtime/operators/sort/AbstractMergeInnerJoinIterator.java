@@ -35,16 +35,17 @@ import java.util.Iterator;
  * An implementation of the {@link org.apache.flink.runtime.operators.util.JoinTaskIterator} that realizes the
  * matching through a sort-merge join strategy.
  */
-public abstract class AbstractMergeMatchIterator<T1, T2, O> extends AbstractMergeIterator<T1, T2, O> {
+public abstract class AbstractMergeInnerJoinIterator<T1, T2, O> extends AbstractMergeIterator<T1, T2, O> {
 
-	public AbstractMergeMatchIterator(MutableObjectIterator<T1> input1, MutableObjectIterator<T2> input2,
-									TypeSerializer<T1> serializer1, TypeComparator<T1> comparator1,
-									TypeSerializer<T2> serializer2, TypeComparator<T2> comparator2,
-									TypePairComparator<T1, T2> pairComparator,
-									MemoryManager memoryManager,
-									IOManager ioManager,
-									int numMemoryPages,
-									AbstractInvokable parentTask)
+	public AbstractMergeInnerJoinIterator(
+			MutableObjectIterator<T1> input1, MutableObjectIterator<T2> input2,
+			TypeSerializer<T1> serializer1, TypeComparator<T1> comparator1,
+			TypeSerializer<T2> serializer2, TypeComparator<T2> comparator2,
+			TypePairComparator<T1, T2> pairComparator,
+			MemoryManager memoryManager,
+			IOManager ioManager,
+			int numMemoryPages,
+			AbstractInvokable parentTask)
 			throws MemoryAllocationException {
 		super(input1, input2, serializer1, comparator1, serializer2, comparator2, pairComparator, memoryManager, ioManager, numMemoryPages, parentTask);
 	}
@@ -52,7 +53,7 @@ public abstract class AbstractMergeMatchIterator<T1, T2, O> extends AbstractMerg
 	/**
 	 * Calls the <code>JoinFunction#match()</code> method for all two key-value pairs that share the same key and come
 	 * from different inputs. The output of the <code>match()</code> method is forwarded.
-	 * <p>
+	 * <p/>
 	 * This method first zig-zags between the two sorted inputs in order to find a common
 	 * key, and then calls the match stub with the cross product of the values.
 	 *

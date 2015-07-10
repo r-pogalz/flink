@@ -30,9 +30,9 @@ import org.apache.flink.runtime.util.ReusingKeyGroupedIterator;
 import org.apache.flink.util.MutableObjectIterator;
 
 
-public class ReusingMergeMatchIterator<T1, T2, O> extends AbstractMergeMatchIterator<T1, T2, O> {
+public class ReusingMergeInnerJoinIterator<T1, T2, O> extends AbstractMergeInnerJoinIterator<T1, T2, O> {
 
-	public ReusingMergeMatchIterator(
+	public ReusingMergeInnerJoinIterator(
 			MutableObjectIterator<T1> input1,
 			MutableObjectIterator<T2> input2,
 			TypeSerializer<T1> serializer1, TypeComparator<T1> comparator1,
