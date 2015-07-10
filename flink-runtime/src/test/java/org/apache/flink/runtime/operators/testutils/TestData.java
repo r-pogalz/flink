@@ -117,7 +117,7 @@ public final class TestData {
 	public static class Generator implements MutableObjectIterator<Record> {
 		
 		public enum KeyMode {
-			SORTED, RANDOM
+			SORTED, RANDOM, SORTED_SPARSE
 		};
 
 		public enum ValueMode {
@@ -130,6 +130,8 @@ public final class TestData {
 		private final long seed;
 
 		private final int keyMax;
+
+		private final float keyDensity;
 
 		private final int valueLength;
 
@@ -153,8 +155,13 @@ public final class TestData {
 		}
 		
 		public Generator(long seed, int keyMax, int valueLength, KeyMode keyMode, ValueMode valueMode, Value constant) {
+			this(seed, keyMax, 1.0f, valueLength, keyMode, valueMode, constant);
+		}
+
+		public Generator(long seed, int keyMax, float keyDensity, int valueLength, KeyMode keyMode, ValueMode valueMode, Value constant) {
 			this.seed = seed;
 			this.keyMax = keyMax;
+			this.keyDensity = keyDensity;
 			this.valueLength = valueLength;
 			this.keyMode = keyMode;
 			this.valueMode = valueMode;
@@ -167,7 +174,7 @@ public final class TestData {
 		}
 
 		public Record next(Record reuse) {
-			this.key.setKey(keyMode == KeyMode.SORTED ? ++counter : Math.abs(random.nextInt() % keyMax) + 1);
+			this.key.setKey(nextKey());
 			if (this.valueMode != ValueMode.CONSTANT) {
 				this.value.setValue(randomString());
 			}
@@ -181,11 +188,23 @@ public final class TestData {
 		}
 
 		public boolean next(org.apache.flink.types.Value[] target) {
-			this.key.setKey(keyMode == KeyMode.SORTED ? ++counter : Math.abs(random.nextInt() % keyMax) + 1);
+			this.key.setKey(nextKey());
 			// TODO change this to something proper
 			((IntValue)target[0]).setValue(this.key.getValue());
 			((IntValue)target[1]).setValue(random.nextInt());
 			return true;
+		}
+
+		private int nextKey() {
+			if (keyMode == KeyMode.SORTED) {
+				return ++counter;
+			} else if (keyMode == KeyMode.SORTED_SPARSE) {
+				int max = (int) (1 / keyDensity);
+				counter += random.nextInt(max) + 1;
+				return counter;
+			} else {
+				return Math.abs(random.nextInt() % keyMax) + 1;
+			}
 		}
 
 		public int sizeOf(Record rec) {
