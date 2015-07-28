@@ -30,9 +30,7 @@ import org.apache.flink.runtime.io.disk.iomanager.IOManagerAsync;
 import org.apache.flink.runtime.jobgraph.tasks.AbstractInvokable;
 import org.apache.flink.runtime.memorymanager.DefaultMemoryManager;
 import org.apache.flink.runtime.memorymanager.MemoryManager;
-import org.apache.flink.runtime.operators.testutils.DiscardingOutputCollector;
-import org.apache.flink.runtime.operators.testutils.DummyInvokable;
-import org.apache.flink.runtime.operators.testutils.TestData;
+import org.apache.flink.runtime.operators.testutils.*;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator.KeyMode;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator.ValueMode;
@@ -309,63 +307,4 @@ public class ReusingSortMergeInnerJoinIteratorITCase {
 		return map;
 	}
 
-	/**
-	 * Private class used for storage of the expected matches in a hashmap.
-	 */
-	private static class Match {
-		private final Value left;
-
-		private final Value right;
-
-		public Match(Value left, Value right) {
-			this.left = left;
-			this.right = right;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			Match o = (Match) obj;
-			return this.left.equals(o.left) && this.right.equals(o.right);
-		}
-		
-		@Override
-		public int hashCode() {
-			return this.left.hashCode() ^ this.right.hashCode();
-		}
-
-		@Override
-		public String toString() {
-			return left + ", " + right;
-		}
-	}
-	
-	private static final class MatchRemovingMatcher extends JoinFunction {
-		private static final long serialVersionUID = 1L;
-		
-		private final Map<TestData.Key, Collection<Match>> toRemoveFrom;
-		
-		protected MatchRemovingMatcher(Map<TestData.Key, Collection<Match>> map) {
-			this.toRemoveFrom = map;
-		}
-		
-		@Override
-		public void join(Record rec1, Record rec2, Collector<Record> out) throws Exception {
-			TestData.Key key = rec1.getField(0, TestData.Key.class);
-			TestData.Value value1 = rec1.getField(1, TestData.Value.class);
-			TestData.Value value2 = rec2.getField(1, TestData.Value.class);
-			
-			Collection<Match> matches = this.toRemoveFrom.get(key);
-			if (matches == null) {
-				Assert.fail("Match " + key + " - " + value1 + ":" + value2 + " is unexpected.");
-			}
-			
-			boolean contained = matches.remove(new Match(value1, value2));
-			if (!contained) {
-				Assert.fail("Produced match was not contained: " + key + " - " + value1 + ":" + value2);
-			}
-			if (matches.isEmpty()) {
-				this.toRemoveFrom.remove(key);
-			}
-		}
-	}
 }

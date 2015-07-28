@@ -18,13 +18,11 @@
 
 package org.apache.flink.runtime.operators.sort;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -49,15 +47,12 @@ import org.apache.flink.runtime.jobgraph.tasks.AbstractInvokable;
 import org.apache.flink.runtime.memorymanager.DefaultMemoryManager;
 import org.apache.flink.runtime.memorymanager.MemoryManager;
 import org.apache.flink.runtime.operators.sort.AbstractMergeOuterJoinIterator.OuterJoinType;
-import org.apache.flink.runtime.operators.testutils.DiscardingOutputCollector;
-import org.apache.flink.runtime.operators.testutils.DummyInvokable;
-import org.apache.flink.runtime.operators.testutils.TestData;
+import org.apache.flink.runtime.operators.testutils.*;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator.KeyMode;
 import org.apache.flink.runtime.operators.testutils.TestData.Generator.ValueMode;
 import org.apache.flink.runtime.util.ResettableMutableObjectIterator;
 import org.apache.flink.types.Record;
-import org.apache.flink.types.Value;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.MutableObjectIterator;
 import org.junit.After;
@@ -133,12 +128,12 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 	@Test
 	public void testFullOuterWithSample() throws Exception {
-		CollectionIterator<Tuple2<String, String>> input1 = createIterator(
+		CollectionIterator<Tuple2<String, String>> input1 = CollectionIterator.of(
 				new Tuple2<String, String>("Jack", "Engineering"),
 				new Tuple2<String, String>("Tim", "Sales"),
 				new Tuple2<String, String>("Zed", "HR")
 		);
-		CollectionIterator<Tuple2<String, Integer>> input2 = createIterator(
+		CollectionIterator<Tuple2<String, Integer>> input2 = CollectionIterator.of(
 				new Tuple2<String, Integer>("Allison", 100),
 				new Tuple2<String, Integer>("Jack", 200),
 				new Tuple2<String, Integer>("Zed", 150),
@@ -161,12 +156,12 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 	@Test
 	public void testLeftOuterWithSample() throws Exception {
-		CollectionIterator<Tuple2<String, String>> input1 = createIterator(
+		CollectionIterator<Tuple2<String, String>> input1 = CollectionIterator.of(
 				new Tuple2<String, String>("Jack", "Engineering"),
 				new Tuple2<String, String>("Tim", "Sales"),
 				new Tuple2<String, String>("Zed", "HR")
 		);
-		CollectionIterator<Tuple2<String, Integer>> input2 = createIterator(
+		CollectionIterator<Tuple2<String, Integer>> input2 = CollectionIterator.of(
 				new Tuple2<String, Integer>("Allison", 100),
 				new Tuple2<String, Integer>("Jack", 200),
 				new Tuple2<String, Integer>("Zed", 150),
@@ -187,12 +182,12 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 	@Test
 	public void testRightOuterWithSample() throws Exception {
-		CollectionIterator<Tuple2<String, String>> input1 = createIterator(
+		CollectionIterator<Tuple2<String, String>> input1 = CollectionIterator.of(
 				new Tuple2<String, String>("Jack", "Engineering"),
 				new Tuple2<String, String>("Tim", "Sales"),
 				new Tuple2<String, String>("Zed", "HR")
 		);
-		CollectionIterator<Tuple2<String, Integer>> input2 = createIterator(
+		CollectionIterator<Tuple2<String, Integer>> input2 = CollectionIterator.of(
 				new Tuple2<String, Integer>("Allison", 100),
 				new Tuple2<String, Integer>("Jack", 200),
 				new Tuple2<String, Integer>("Zed", 150),
@@ -213,12 +208,12 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 	@Test
 	public void testRightSideEmpty() throws Exception {
-		CollectionIterator<Tuple2<String, String>> input1 = createIterator(
+		CollectionIterator<Tuple2<String, String>> input1 = CollectionIterator.of(
 				new Tuple2<String, String>("Jack", "Engineering"),
 				new Tuple2<String, String>("Tim", "Sales"),
 				new Tuple2<String, String>("Zed", "HR")
 		);
-		CollectionIterator<Tuple2<String, Integer>> input2 = createIterator();
+		CollectionIterator<Tuple2<String, Integer>> input2 = CollectionIterator.of();
 
 		List<Tuple4<String, String, String, Object>> actualLeft = computeOuterJoin(input1, input2, OuterJoinType.LEFT);
 		List<Tuple4<String, String, String, Object>> actualRight = computeOuterJoin(input1, input2, OuterJoinType.RIGHT);
@@ -237,8 +232,8 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 	@Test
 	public void testLeftSideEmpty() throws Exception {
-		CollectionIterator<Tuple2<String, String>> input1 = createIterator();
-		CollectionIterator<Tuple2<String, Integer>> input2 = createIterator(
+		CollectionIterator<Tuple2<String, String>> input1 = CollectionIterator.of();
+		CollectionIterator<Tuple2<String, Integer>> input2 = CollectionIterator.of(
 				new Tuple2<String, Integer>("Allison", 100),
 				new Tuple2<String, Integer>("Jack", 200),
 				new Tuple2<String, Integer>("Zed", 150),
@@ -261,10 +256,6 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 		Assert.assertEquals(expected, actualFull);
 	}
 
-	private <T> CollectionIterator<T> createIterator(T... values) {
-		return new CollectionIterator<T>(Arrays.asList(values));
-	}
-
 	private List<Tuple4<String, String, String, Object>> computeOuterJoin(ResettableMutableObjectIterator<Tuple2<String, String>> input1,
 																		  ResettableMutableObjectIterator<Tuple2<String, Integer>> input2,
 																		  OuterJoinType outerJoinType) throws Exception {
@@ -277,7 +268,7 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 
 		List<Tuple4<String, String, String, Object>> actual = new ArrayList<Tuple4<String, String, String, Object>>();
         ListCollector<Tuple4<String, String, String, Object>> collector = new ListCollector<Tuple4<String, String, String, Object>>(actual);
-        while (iterator.callWithNextKey(new SimpleFlatJoinFunction(), collector)) ;
+		while (iterator.callWithNextKey(new SimpleTupleJoinFunction(), collector)) ;
 		iterator.close();
 
 		return actual;
@@ -359,7 +350,7 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 			input1 = new MergeIterator<Record>(inList1, comparator1.duplicate());
 			input2 = new MergeIterator<Record>(inList2, comparator2.duplicate());
 
-			final FlatJoinFunction matcher = new MatchRemovingMatcher(outerJoinType, expectedMatchesMap);
+			final FlatJoinFunction matcher = new MatchRemovingMatcher(expectedMatchesMap);
 
 			final Collector<Record> collector = new DiscardingOutputCollector<Record>();
 
@@ -394,23 +385,6 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 	//                                    Utilities
 	// --------------------------------------------------------------------------------------------
 
-
-	/**
-	 * custom function that simply joins two tuples and considers null cases
-	 */
-	private static class SimpleFlatJoinFunction implements FlatJoinFunction<Tuple2<String, String>, Tuple2<String, Integer>, Tuple4<String, String, String, Object>> {
-
-		@Override
-		public void join(Tuple2<String, String> first, Tuple2<String, Integer> second, Collector<Tuple4<String, String, String, Object>> out) throws Exception {
-			if (first == null) {
-				out.collect(new Tuple4<String, String, String, Object>(null, null, second.f0, second.f1));
-			} else if (second == null) {
-				out.collect(new Tuple4<String, String, String, Object>(first.f0, first.f1, null, null));
-			} else {
-				out.collect(new Tuple4<String, String, String, Object>(first.f0, first.f1, second.f0, second.f1));
-			}
-		}
-	}
 
 	private Map<TestData.Key, Collection<Match>> joinValues(
 			Map<TestData.Key, Collection<TestData.Value>> leftMap,
@@ -487,108 +461,4 @@ public class NonReusingSortMergeOuterJoinIteratorITCase {
 		return map;
 	}
 
-	/**
-	 * Private class used for storage of the expected matches in a hashmap.
-	 */
-	private static class Match {
-		private final Value left;
-
-		private final Value right;
-
-		public Match(Value left, Value right) {
-			this.left = left;
-			this.right = right;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			Match o = (Match) obj;
-			if (left == null && o.left == null && right.equals(o.right)) {
-				return true;
-			} else if (right == null && o.right == null && left.equals(o.left)) {
-				return true;
-			} else {
-				return this.left.equals(o.left) && this.right.equals(o.right);
-			}
-		}
-
-		@Override
-		public int hashCode() {
-			if (left == null) {
-				return right.hashCode();
-			} else if (right == null) {
-				return left.hashCode();
-			} else {
-				return this.left.hashCode() ^ this.right.hashCode();
-			}
-		}
-
-		@Override
-		public String toString() {
-			return left + ", " + right;
-		}
-	}
-
-	private static final class MatchRemovingMatcher implements FlatJoinFunction<Record, Record, Record> {
-		private static final long serialVersionUID = 1L;
-
-		private final Map<TestData.Key, Collection<Match>> toRemoveFrom;
-		private OuterJoinType outerJoinType;
-
-		protected MatchRemovingMatcher(OuterJoinType outerJoinType, Map<TestData.Key, Collection<Match>> map) {
-			this.outerJoinType = outerJoinType;
-			this.toRemoveFrom = map;
-		}
-
-		@Override
-		public void join(Record rec1, Record rec2, Collector<Record> out) throws Exception {
-			TestData.Key key = rec1 != null ? rec1.getField(0, TestData.Key.class) : rec2.getField(0, TestData.Key.class);
-			TestData.Value value1 = rec1 != null ? rec1.getField(1, TestData.Value.class) : null;
-			TestData.Value value2 = rec2 != null ? rec2.getField(1, TestData.Value.class) : null;
-
-			Collection<Match> matches = this.toRemoveFrom.get(key);
-			if (matches == null) {
-				Assert.fail("Match " + key + " - " + value1 + ":" + value2 + " is unexpected for outer join of type '" + outerJoinType + "'.");
-			}
-
-			boolean contained = matches.remove(new Match(value1, value2));
-			if (!contained) {
-				Assert.fail("Outer join type '" + outerJoinType + "'. Produced match was not contained: " + key + " - " + value1 + ":" + value2);
-			}
-			if (matches.isEmpty()) {
-				this.toRemoveFrom.remove(key);
-			}
-		}
-
-	}
-
-	private class CollectionIterator<T> implements ResettableMutableObjectIterator<T> {
-
-		private final Collection<T> collection;
-		private Iterator<T> iterator;
-
-		public CollectionIterator(Collection<T> collection) {
-			this.collection = collection;
-			this.iterator = collection.iterator();
-		}
-
-		@Override
-		public T next(T reuse) throws IOException {
-			return next();
-		}
-
-		@Override
-		public T next() throws IOException {
-			if (!iterator.hasNext()) {
-				return null;
-			} else {
-				return iterator.next();
-			}
-		}
-
-		@Override
-		public void reset() throws IOException {
-			iterator = collection.iterator();
-		}
-	}
 }
