@@ -1,0 +1,555 @@
+———————————————————————— 1st Run (~20k callWithNextKey() calls, 20k left side, 10k right side) ———————————————————————————————
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 5,850 s/op
+# Warmup Iteration   2: 4,128 s/op
+# Warmup Iteration   3: 4,209 s/op
+# Warmup Iteration   4: 4,610 s/op
+# Warmup Iteration   5: 4,135 s/op
+# Warmup Iteration   6: 3,974 s/op
+# Warmup Iteration   7: 4,213 s/op
+# Warmup Iteration   8: 4,071 s/op
+# Warmup Iteration   9: 4,203 s/op
+# Warmup Iteration  10: 3,961 s/op
+Iteration   1: 3,653 s/op
+Iteration   2: 3,943 s/op
+Iteration   3: 4,343 s/op
+Iteration   4: 4,175 s/op
+Iteration   5: 4,316 s/op
+Iteration   6: 4,204 s/op
+Iteration   7: 4,358 s/op
+Iteration   8: 4,330 s/op
+Iteration   9: 4,168 s/op
+Iteration  10: 4,306 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  4,180 ±(99.9%) 0,338 s/op [Average]
+  (min, avg, max) = (3,653, 4,180, 4,358), stdev = 0,223
+  CI (99.9%): [3,842, 4,517] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:01:30
+# Fork: 1 of 1
+# Warmup Iteration   1: 4,716 s/op
+# Warmup Iteration   2: 4,184 s/op
+# Warmup Iteration   3: 4,355 s/op
+# Warmup Iteration   4: 4,367 s/op
+# Warmup Iteration   5: 4,453 s/op
+# Warmup Iteration   6: 4,519 s/op
+# Warmup Iteration   7: 4,567 s/op
+# Warmup Iteration   8: 4,507 s/op
+# Warmup Iteration   9: 4,355 s/op
+# Warmup Iteration  10: 4,502 s/op
+Iteration   1: 4,238 s/op
+Iteration   2: 4,320 s/op
+Iteration   3: 4,373 s/op
+Iteration   4: 4,340 s/op
+Iteration   5: 4,353 s/op
+Iteration   6: 4,267 s/op
+Iteration   7: 4,301 s/op
+Iteration   8: 4,556 s/op
+Iteration   9: 4,325 s/op
+Iteration  10: 4,406 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  4,348 ±(99.9%) 0,133 s/op [Average]
+  (min, avg, max) = (4,238, 4,348, 4,556), stdev = 0,088
+  CI (99.9%): [4,215, 4,481] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:03:04
+
+Benchmark                                                     Mode  Cnt  Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  4,180 ± 0,338   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  4,348 ± 0,133   s/op
+
+
+
+———————————————————————— 2nd Run (~20k callWithNextKey() calls, 20k left side, 10k right side) ———————————————————————————————
+
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 6,523 s/op
+# Warmup Iteration   2: 4,645 s/op
+# Warmup Iteration   3: 4,139 s/op
+# Warmup Iteration   4: 4,296 s/op
+# Warmup Iteration   5: 3,902 s/op
+# Warmup Iteration   6: 4,046 s/op
+# Warmup Iteration   7: 4,397 s/op
+# Warmup Iteration   8: 4,346 s/op
+# Warmup Iteration   9: 4,205 s/op
+# Warmup Iteration  10: 4,371 s/op
+Iteration   1: 4,495 s/op
+Iteration   2: 4,325 s/op
+Iteration   3: 4,446 s/op
+Iteration   4: 4,556 s/op
+Iteration   5: 4,469 s/op
+Iteration   6: 4,431 s/op
+Iteration   7: 4,314 s/op
+Iteration   8: 4,428 s/op
+Iteration   9: 4,445 s/op
+Iteration  10: 4,308 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  4,422 ±(99.9%) 0,124 s/op [Average]
+  (min, avg, max) = (4,308, 4,422, 4,556), stdev = 0,082
+  CI (99.9%): [4,298, 4,546] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:01:34
+# Fork: 1 of 1
+# Warmup Iteration   1: 4,740 s/op
+# Warmup Iteration   2: 4,444 s/op
+# Warmup Iteration   3: 4,401 s/op
+# Warmup Iteration   4: 4,322 s/op
+# Warmup Iteration   5: 4,471 s/op
+# Warmup Iteration   6: 4,281 s/op
+# Warmup Iteration   7: 4,352 s/op
+# Warmup Iteration   8: 4,496 s/op
+# Warmup Iteration   9: 4,301 s/op
+# Warmup Iteration  10: 4,276 s/op
+Iteration   1: 4,099 s/op
+Iteration   2: 3,916 s/op
+Iteration   3: 3,680 s/op
+Iteration   4: 4,331 s/op
+Iteration   5: 4,405 s/op
+Iteration   6: 4,309 s/op
+Iteration   7: 4,306 s/op
+Iteration   8: 4,323 s/op
+Iteration   9: 4,333 s/op
+Iteration  10: 4,253 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  4,195 ±(99.9%) 0,349 s/op [Average]
+  (min, avg, max) = (3,680, 4,195, 4,405), stdev = 0,231
+  CI (99.9%): [3,847, 4,544] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:03:06
+
+Benchmark                                                     Mode  Cnt  Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  4,422 ± 0,124   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  4,195 ± 0,349   s/op
+
+
+
+
+———————————————————————— 3rd Run (~20k callWithNextKey() calls, 20k left side, 10k right side) ———————————————————————————————
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 5,311 s/op
+# Warmup Iteration   2: 4,183 s/op
+# Warmup Iteration   3: 4,258 s/op
+# Warmup Iteration   4: 4,182 s/op
+# Warmup Iteration   5: 4,235 s/op
+# Warmup Iteration   6: 4,448 s/op
+# Warmup Iteration   7: 4,261 s/op
+# Warmup Iteration   8: 4,338 s/op
+# Warmup Iteration   9: 4,288 s/op
+# Warmup Iteration  10: 4,299 s/op
+Iteration   1: 4,282 s/op
+Iteration   2: 4,331 s/op
+Iteration   3: 4,224 s/op
+Iteration   4: 4,254 s/op
+Iteration   5: 4,254 s/op
+Iteration   6: 4,174 s/op
+Iteration   7: 4,248 s/op
+Iteration   8: 4,333 s/op
+Iteration   9: 4,211 s/op
+Iteration  10: 4,147 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  4,246 ±(99.9%) 0,091 s/op [Average]
+  (min, avg, max) = (4,147, 4,246, 4,333), stdev = 0,060
+  CI (99.9%): [4,154, 4,337] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 12 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:01:31
+# Fork: 1 of 1
+# Warmup Iteration   1: 4,637 s/op
+# Warmup Iteration   2: 4,327 s/op
+# Warmup Iteration   3: 4,370 s/op
+# Warmup Iteration   4: 4,322 s/op
+# Warmup Iteration   5: 4,193 s/op
+# Warmup Iteration   6: 4,399 s/op
+# Warmup Iteration   7: 4,337 s/op
+# Warmup Iteration   8: 4,124 s/op
+# Warmup Iteration   9: 4,200 s/op
+# Warmup Iteration  10: 4,258 s/op
+Iteration   1: 4,775 s/op
+Iteration   2: 4,129 s/op
+Iteration   3: 4,300 s/op
+Iteration   4: 4,226 s/op
+Iteration   5: 4,134 s/op
+Iteration   6: 4,172 s/op
+Iteration   7: 4,131 s/op
+Iteration   8: 4,165 s/op
+Iteration   9: 4,183 s/op
+Iteration  10: 4,294 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  4,251 ±(99.9%) 0,294 s/op [Average]
+  (min, avg, max) = (4,129, 4,251, 4,775), stdev = 0,194
+  CI (99.9%): [3,957, 4,545] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:03:03
+
+Benchmark                                                     Mode  Cnt  Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  4,246 ± 0,091   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  4,251 ± 0,294   s/op
+
+
+
+———————————————————————— 4th Run (~50k callWithNextKey() calls, 50k left side, 10k right side)———————————————————————————————
+
+
+# JMH 1.10.3 (released 13 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,954 s/op
+# Warmup Iteration   2: 7,660 s/op
+# Warmup Iteration   3: 7,885 s/op
+# Warmup Iteration   4: 7,857 s/op
+# Warmup Iteration   5: 8,042 s/op
+# Warmup Iteration   6: 7,947 s/op
+# Warmup Iteration   7: 7,933 s/op
+# Warmup Iteration   8: 7,868 s/op
+# Warmup Iteration   9: 7,950 s/op
+# Warmup Iteration  10: 7,811 s/op
+Iteration   1: 7,885 s/op
+Iteration   2: 7,623 s/op
+Iteration   3: 8,292 s/op
+Iteration   4: 7,865 s/op
+Iteration   5: 7,770 s/op
+Iteration   6: 7,871 s/op
+Iteration   7: 7,846 s/op
+Iteration   8: 7,812 s/op
+Iteration   9: 7,746 s/op
+Iteration  10: 8,424 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  7,913 ±(99.9%) 0,376 s/op [Average]
+  (min, avg, max) = (7,623, 7,913, 8,424), stdev = 0,248
+  CI (99.9%): [7,538, 8,289] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 13 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:02:44
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,389 s/op
+# Warmup Iteration   2: 7,890 s/op
+# Warmup Iteration   3: 7,832 s/op
+# Warmup Iteration   4: 7,920 s/op
+# Warmup Iteration   5: 7,779 s/op
+# Warmup Iteration   6: 7,166 s/op
+# Warmup Iteration   7: 7,958 s/op
+# Warmup Iteration   8: 7,914 s/op
+# Warmup Iteration   9: 7,682 s/op
+# Warmup Iteration  10: 7,801 s/op
+Iteration   1: 7,692 s/op
+Iteration   2: 7,659 s/op
+Iteration   3: 7,875 s/op
+Iteration   4: 7,672 s/op
+Iteration   5: 7,755 s/op
+Iteration   6: 7,735 s/op
+Iteration   7: 7,918 s/op
+Iteration   8: 8,484 s/op
+Iteration   9: 7,656 s/op
+Iteration  10: 8,002 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  7,845 ±(99.9%) 0,385 s/op [Average]
+  (min, avg, max) = (7,656, 7,845, 8,484), stdev = 0,254
+  CI (99.9%): [7,460, 8,229] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:05:27
+
+Benchmark                                                     Mode  Cnt  Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  7,913 ± 0,376   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  7,845 ± 0,385   s/op
+
+
+
+———————————————————————— 5th Run (~50k callWithNextKey() calls, 50k left side, 50k right side)—————————————————————————————
+
+
+# JMH 1.10.3 (released 13 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 11,331 s/op
+# Warmup Iteration   2: 10,252 s/op
+# Warmup Iteration   3: 10,402 s/op
+# Warmup Iteration   4: 10,440 s/op
+# Warmup Iteration   5: 10,444 s/op
+# Warmup Iteration   6: 9,787 s/op
+# Warmup Iteration   7: 10,251 s/op
+# Warmup Iteration   8: 10,453 s/op
+# Warmup Iteration   9: 10,393 s/op
+# Warmup Iteration  10: 10,547 s/op
+Iteration   1: 11,408 s/op
+Iteration   2: 10,390 s/op
+Iteration   3: 10,716 s/op
+Iteration   4: 10,284 s/op
+Iteration   5: 10,546 s/op
+Iteration   6: 10,746 s/op
+Iteration   7: 10,497 s/op
+Iteration   8: 10,334 s/op
+Iteration   9: 10,416 s/op
+Iteration  10: 10,376 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  10,571 ±(99.9%) 0,502 s/op [Average]
+  (min, avg, max) = (10,284, 10,571, 11,408), stdev = 0,332
+  CI (99.9%): [10,070, 11,073] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 13 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:03:35
+# Fork: 1 of 1
+# Warmup Iteration   1: 10,718 s/op
+# Warmup Iteration   2: 10,215 s/op
+# Warmup Iteration   3: 10,446 s/op
+# Warmup Iteration   4: 10,501 s/op
+# Warmup Iteration   5: 10,320 s/op
+# Warmup Iteration   6: 9,852 s/op
+# Warmup Iteration   7: 10,455 s/op
+# Warmup Iteration   8: 10,213 s/op
+# Warmup Iteration   9: 10,306 s/op
+# Warmup Iteration  10: 10,330 s/op
+Iteration   1: 10,299 s/op
+Iteration   2: 10,242 s/op
+Iteration   3: 10,074 s/op
+Iteration   4: 10,548 s/op
+Iteration   5: 10,536 s/op
+Iteration   6: 10,382 s/op
+Iteration   7: 10,160 s/op
+Iteration   8: 10,458 s/op
+Iteration   9: 10,357 s/op
+Iteration  10: 9,459 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  10,251 ±(99.9%) 0,481 s/op [Average]
+  (min, avg, max) = (9,459, 10,251, 10,548), stdev = 0,318
+  CI (99.9%): [9,771, 10,732] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:07:07
+
+Benchmark                                                     Mode  Cnt   Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  10,571 ± 0,502   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  10,251 ± 0,481   s/op
+
+
+
+———————————————————————— 6th Run (~100k callWithNextKey() calls, 100k left side, 50k right side)—————————————————————————————
+
+
+# JMH 1.10.3 (released 14 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass
+
+# Run progress: 0,00% complete, ETA 00:00:40
+# Fork: 1 of 1
+# Warmup Iteration   1: 14,702 s/op
+# Warmup Iteration   2: 13,403 s/op
+# Warmup Iteration   3: 13,927 s/op
+# Warmup Iteration   4: 13,610 s/op
+# Warmup Iteration   5: 13,769 s/op
+# Warmup Iteration   6: 13,969 s/op
+# Warmup Iteration   7: 13,709 s/op
+# Warmup Iteration   8: 13,835 s/op
+# Warmup Iteration   9: 13,900 s/op
+# Warmup Iteration  10: 13,977 s/op
+Iteration   1: 13,919 s/op
+Iteration   2: 14,108 s/op
+Iteration   3: 13,610 s/op
+Iteration   4: 13,694 s/op
+Iteration   5: 13,924 s/op
+Iteration   6: 13,823 s/op
+Iteration   7: 13,883 s/op
+Iteration   8: 14,028 s/op
+Iteration   9: 14,107 s/op
+Iteration  10: 13,973 s/op
+
+
+Result "testLeftOuterJoinWithDedicatedClass":
+  13,907 ±(99.9%) 0,248 s/op [Average]
+  (min, avg, max) = (13,610, 13,907, 14,108), stdev = 0,164
+  CI (99.9%): [13,659, 14,154] (assumes normal distribution)
+
+
+# JMH 1.10.3 (released 14 days ago)
+# VM version: JDK 1.8.0_45, VM 25.45-b02
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/bin/java
+# VM options: -server
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.apache.flink.runtime.operators.sort.OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes
+
+# Run progress: 50,00% complete, ETA 00:04:43
+# Fork: 1 of 1
+# Warmup Iteration   1: 14,558 s/op
+# Warmup Iteration   2: 14,195 s/op
+# Warmup Iteration   3: 14,094 s/op
+# Warmup Iteration   4: 14,083 s/op
+# Warmup Iteration   5: 14,211 s/op
+# Warmup Iteration   6: 14,300 s/op
+# Warmup Iteration   7: 14,231 s/op
+# Warmup Iteration   8: 14,549 s/op
+# Warmup Iteration   9: 12,251 s/op
+# Warmup Iteration  10: 14,044 s/op
+Iteration   1: 14,226 s/op
+Iteration   2: 14,352 s/op
+Iteration   3: 14,236 s/op
+Iteration   4: 14,003 s/op
+Iteration   5: 14,204 s/op
+Iteration   6: 14,235 s/op
+Iteration   7: 13,315 s/op
+Iteration   8: 14,186 s/op
+Iteration   9: 14,076 s/op
+Iteration  10: 14,067 s/op
+
+
+Result "testLeftOuterJoinWithSameClassForAllTypes":
+  14,090 ±(99.9%) 0,440 s/op [Average]
+  (min, avg, max) = (13,315, 14,090, 14,352), stdev = 0,291
+  CI (99.9%): [13,650, 14,529] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:09:30
+
+Benchmark                                                     Mode  Cnt   Score   Error  Units
+OuterJoinBenchmark.testLeftOuterJoinWithDedicatedClass        avgt   10  13,907 ± 0,248   s/op
+OuterJoinBenchmark.testLeftOuterJoinWithSameClassForAllTypes  avgt   10  14,090 ± 0,440   s/op
+
