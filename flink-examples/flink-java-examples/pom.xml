@@ -319,6 +319,52 @@ under the License.
 							</includes>
 						</configuration>
 					</execution>
+
+					<!-- NativeOuterJoin -->
+					<execution>
+						<id>NativeOuterJoin</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>NativeOuterJoin</classifier>
+
+							<archive>
+								<manifestEntries>
+									<program-class>org.apache.flink.examples.java.misc.NativeOuterJoin</program-class>
+								</manifestEntries>
+							</archive>
+
+							<includes>
+								<include>**/java/misc/NativeOuterJoin.class</include>
+								<include>**/java/misc/NativeOuterJoin$*.class</include>
+							</includes>
+						</configuration>
+					</execution>
+
+					<!-- CoGroupOuterJoin -->
+					<execution>
+						<id>CoGroupOuterJoin</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>CoGroupOuterJoin</classifier>
+
+							<archive>
+								<manifestEntries>
+									<program-class>org.apache.flink.examples.java.misc.CoGroupOuterJoin</program-class>
+								</manifestEntries>
+							</archive>
+
+							<includes>
+								<include>**/java/misc/CoGroupOuterJoin.class</include>
+								<include>**/java/misc/CoGroupOuterJoin$*.class</include>
+							</includes>
+						</configuration>
+					</execution>
 					
 				</executions>
 			</plugin>
@@ -346,6 +392,8 @@ under the License.
 								<copy file="${project.basedir}/target/flink-java-examples-${project.version}-WebLogAnalysis.jar" tofile="${project.basedir}/target/WebLogAnalysis.jar" />
 								<copy file="${project.basedir}/target/flink-java-examples-${project.version}-WordCount.jar" tofile="${project.basedir}/target/WordCount.jar" />
 								<copy file="${project.basedir}/target/flink-java-examples-${project.version}-WordCountPOJO.jar" tofile="${project.basedir}/target/WordCountPOJO.jar" />
+								<copy file="${project.basedir}/target/flink-java-examples-${project.version}-NativeOuterJoin.jar" tofile="${project.basedir}/target/NativeOuterJoin.jar" />
+								<copy file="${project.basedir}/target/flink-java-examples-${project.version}-CoGroupOuterJoin.jar" tofile="${project.basedir}/target/CoGroupOuterJoin.jar" />
 							</target>
 						</configuration>
 					</execution>
